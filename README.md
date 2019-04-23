@@ -9,6 +9,10 @@ Então resolvi criar um gravador para ser compatível com qualquer versão do wi
 A gravação destes microcontroladores é feita com o protocolo SPI, e cada modelo tem um algoritmo próprio de gravação. O Grava Atmel pulsa os pinos de controle da porta serial, simulando a comunicação SPI.
 O código fonte está escrito em Delphi e está super feio, sem comentários e difícil de entender.
 
+# Compilando
+Os fontes estão em Delphi 7, não precisa instalar nenhum componente pois eles são carregados dinamicamente.
+Para compilar na linha de comando digite: dcc32 -B Grava.dpr
+
 # Créditos
 Jakub Jiricek pelo Blast8252.
 A todos os usuários, os feedbacks, dúvidas e sugestões.
