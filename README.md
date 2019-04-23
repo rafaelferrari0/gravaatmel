@@ -3,7 +3,7 @@ Software gravador de microcontroladores antigos da Atmel, modelos suportados sã
 
 # Sobre
 O programa surgiu nos anos 2000, era época do Windows 98 e usávamos o *Blast8252* para gravar os microcontroladores dos nossos projetos ~~doidos~~. Quando lançaram os novos Windows 2000 e XP, o *Blast* não era compatível e o desenvolvedor não lançou mais atualizações.
-Então resolvi criar um gravador para substituir o *Blast* e ser compatível com novas versões do windows, e assim surgiu o Grava Atmel. Com o tempo o gravador recebeu novas funcionalidades, muitas ideias dos usuários e atualmente funciona pela porta serial, compatível com adaptadores Usb-Serial.
+Então resolvi criar um gravador simples de usar igual ao *Blast*, compatível com as novas versões do windows, e assim surgiu o *Grava Atmel*. Com o tempo o gravador recebeu novas funcionalidades, muitas ideias dos usuários e atualmente funciona pela porta serial, compatível com adaptadores Usb-Serial.
 
 # Detalhes
 A gravação destes microcontroladores é feita com o protocolo SPI, e cada modelo tem um algoritmo próprio de gravação. O Grava Atmel pulsa os pinos de controle da porta serial, simulando a comunicação SPI.
