@@ -15,7 +15,7 @@ Para compilar na linha de comando digite:
 ```dcc32 -B Grava.dpr```
 
 # Créditos
-Jakub Jiricek pelo Blast8252.
+[Jakub Jiricek](https://web.archive.org/web/20011129105644/http://www.telegraf.cz/jak/prog.html) pelo Blast8252.
 A todos os usuários, os feedbacks, dúvidas e sugestões.
 
 Aos anos 90! :metal:
