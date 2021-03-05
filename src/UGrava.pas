@@ -4,29 +4,33 @@ unit UGrava;
 {$DEFINE PT-BR}
 
 {
-Grava Atmel - (c) Rafael Ferrari - 2003 - 2016
+Grava Atmel - (c) Rafael Ferrari - 2003 - 2021
 
-Programa para gravar a série Atmel 89S com o protocolo SPI.
+Programa para gravar a sÃ©rie Atmel 89S com o protocolo SPI.
 
 Este programa surgiu em 2003 para substituir o blast8252.
-O blast8252 é um programador que utiliza a porta paralela, não funcionava em windows XP,
+O blast8252 Ã© um programador que utiliza a porta paralela, nÃ£o funcionava em windows XP,
 e era fornecido junto com os kits do site microcontrolador.com.br.
+
+Atualmente o site nÃ£o existe mais, mas pode ser visto como era em 2008 neste link:
+https://web.archive.org/web/20080714072649/http://www.microcontrolador.com.br/
+
 Criei o Grava Atmel para funcionar com o windows xp, e com interface em portugues.
 
 Atualmente o Grava utiliza a porta serial para simular o protocolo SPI.
-A intenção foi criar um gravador super barato e fácil de montar, pois todos os
-componentes são fáceis de encontrar.
+A intenÃ§Ã£o foi criar um gravador super barato e fÃ¡cil de montar, pois todos os
+componentes sÃ£o fÃ¡ceis de encontrar.
 
-A migração foi feita utilizando o código existente, você vai encontrar
+A migraÃ§Ã£o foi feita utilizando o cÃ³digo existente, vocÃª vai encontrar
 muita sujeira aqui!
 
 Rotina principal:
 SPI(dado: byte): byte;  >> Simula o protocolo SPI pulsando os pinos da porta.
 
-Rotina de gravação:     >> Loop de leitura e gravação
+Rotina de gravaÃ§Ã£o:     >> Loop de leitura e gravaÃ§Ã£o
 BitBtn2Click(Sender: TObject);
 
-Rotinas auxiliares:     >> Utilizam a SPI para ler ou gravar a memoria, dependendo do algoritmo de gravação (modelo)
+Rotinas auxiliares:     >> Utilizam a SPI para ler ou gravar a memoria, dependendo do algoritmo de gravaÃ§Ã£o (modelo)
 LeByte(mem: integer): byte;
 GravaByte(mem: integer; dado: byte);
 
@@ -127,6 +131,7 @@ type
     CheckBoxFuse893: TCheckBox;
     CheckBoxFuse894: TCheckBox;
     Label2: TLabel;
+    Ignorarassinatura: TMenuItem;
 
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -231,28 +236,28 @@ resourcestring
 
 {$IFDEF PT-BR}
 STR_NAME_PROGRAM = 'Grava Atmel';
-STR_COPYRIGHT = '"GRAVA ATMEL" (porta serial) v3.2, ©2016 Rafael B. Ferrari.' +#13 + #10 + 'rafaelbf@hotmail.com';
-STR_NON_SERIAL = 'Não foi possível abrir a porta serial. Escolha uma outra no menu "Porta"';
+STR_COPYRIGHT = '"GRAVA ATMEL" (porta serial) v3.3, Â©2021 Rafael B. Ferrari.' +#13 + #10 + 'rafaelbf@hotmail.com';
+STR_NON_SERIAL = 'NÃ£o foi possÃ­vel abrir a porta serial. Escolha uma outra no menu "Porta"';
 STR_LOCKREAD_OK = 'L.B. lido';
 STR_LOCKWRITE_OK = 'L.B. programado';
 STR_FUSEREAD_OK = 'F.B. lido';
 STR_FUSEWRITE_OK = 'F.B. programado';
-STR_CONCLUIDO = 'Concluído';
-STR_DADOS_IGUAIS =  'Os dados são idênticos';
-STR_DADOS_DIF = 'O arquivo possui diferenças.';
+STR_CONCLUIDO = 'ConcluÃ­do';
+STR_DADOS_IGUAIS =  'Os dados sÃ£o idÃªnticos';
+STR_DADOS_DIF = 'O arquivo possui diferenÃ§as.';
 STR_BYTES_DIF = 'bytes diferentes';
 STR_COMPARANDO = 'Comparando';
 STR_PRONTO = 'Pronto';
-STR_TESTECON = 'Conexão OK';
-STR_UTIL_PARAMETROS = 'Utilização dos parâmetros:';
+STR_TESTECON = 'ConexÃ£o OK';
+STR_UTIL_PARAMETROS = 'UtilizaÃ§Ã£o dos parÃ¢metros:';
 STR_AGUARDE = 'aguarde...';
-STR_ERRO_GRAVA = 'Erro de gravação';
+STR_ERRO_GRAVA = 'Erro de gravaÃ§Ã£o';
 STR_MAX_EEPROM = 'Tamanho do arquivo ultrapassa a capacidade da eeprom do chip.';
 STR_GRAVANDO = 'Gravando';
 STR_MAX_FLASH = 'Tamanho do arquivo ultrapassa a capacidade da flash do chip.';
-STR_MEM_APAGADA = 'Memória apagada!';
+STR_MEM_APAGADA = 'MemÃ³ria apagada!';
 STR_LENDO = 'Lendo';
-STR_MEM_APAGANDO = 'Apagando memória...';
+STR_MEM_APAGANDO = 'Apagando memÃ³ria...';
 STR_VERIFIGRAVA = 'Gravando e Verificando';
 STR_DE = 'de';
 STR_FILTER_HEXBIN = 'Arquivos .BIN|*.bin|Arquivos .HEX|*.hex';
@@ -260,10 +265,10 @@ STR_FILTER_BIN = 'Arquivos .BIN|*.bin';
 STR_FILTER_HEX = 'Arquivos .HEX|*.hex';
 STR_CHIP = 'chip';
 STR_ARQUIVO = 'arquivo';
-STR_SCHEMATIC = 'esquema de ligação';
+STR_SCHEMATIC = 'esquema de ligaÃ§Ã£o';
 STR_SCHTIP = 'Alimentar o circuito com 5V'+#13+#10+'Usar capacitor de 100uF entre 5V e terra'+#13+#10+'Confira no datasheet os pinos correspondentes para o Atmega';
 STR_CHIP_DESC = 'CHIP = s8252, s8253, s53, s52, s51 ou atmega8';
-STR_ARQUIVO_DESC = 'ARQUIVO = Arquivo a ser gravado. (A gravação será iniciada automaticamente)';
+STR_ARQUIVO_DESC = 'ARQUIVO = Arquivo a ser gravado. (A gravaÃ§Ã£o serÃ¡ iniciada automaticamente)';
 STR_INSERTMODE = 'Modo INSERT';
 STR_READONLY = 'Somente leitura';
 STR_EDITOR = 'Editor HEX';
@@ -275,10 +280,10 @@ STR_BOT_LOCK = 'Gravar';
 STR_BOT_SAIR = 'Sair';
 STR_BOT_RESET = 'Reset';
 STR_BOT_AJUDA = 'Ajuda';
-STR_BOT_CANCEL = 'Interromper gravação/verificação';
-STR_BOT_TESTAR = 'Testar conexão';
+STR_BOT_CANCEL = 'Interromper gravaÃ§Ã£o/verificaÃ§Ã£o';
+STR_BOT_TESTAR = 'Testar conexÃ£o';
 STR_MENU_CHIP = 'Chip';
-STR_MENU_GRAVACAO = 'Gravação';
+STR_MENU_GRAVACAO = 'GravaÃ§Ã£o';
 STR_MENU_FERRAMENTAS = 'Ferramentas';
 STR_MENU_AJUDA = 'Ajuda';
 STR_MENU_PORTA = 'Porta';
@@ -289,16 +294,17 @@ STR_SUBMENU_SAVEAS = 'Salvar como...';
 STR_SUBMENU_EXIT = 'Sair';
 STR_SUBMENU_NORMAL = 'Normal';
 STR_SUBMENU_DIFERENCIAL = 'Diferencial';
-STR_SUBMENU_FAST = 'Rápida';
+STR_SUBMENU_FAST = 'RÃ¡pida';
 STR_SUBMENU_CONVHEXBIN = 'Converter HEX -> BIN';
 STR_SUBMENU_CONVBINHEX = 'Converter BIN -> HEX';
 STR_SUBMENU_EDITHEX = 'Editor hexadecimal';
+STR_SUBMENU_IGNORASIGN = 'Ignorar assinatura';
 STR_SUBMENU_ESQUEMA = 'Esquema';
-STR_SUBMENU_GRAVACAO = 'Gravação';
+STR_SUBMENU_GRAVACAO = 'GravaÃ§Ã£o';
 STR_SUBMENU_SOBRE = 'Sobre...';
 STR_SUBMENU_CHOOSEPORT = 'Selecionar porta serial';
-STR_MSG_INFORMATION = 'Informação';
-STR_ERR_COM = 'Erro de comunicação';
+STR_MSG_INFORMATION = 'InformaÃ§Ã£o';
+STR_ERR_COM = 'Erro de comunicaÃ§Ã£o';
 STR_MSG_TYPE_EXCLAMATION = 'Aviso';
 STR_MSG_TYPE_ERROR = 'Erro';
 STR_MSG_FILETOOBIG = 'Arquivo muito grande para ser carregado';
@@ -306,61 +312,61 @@ STR_MSG_RESET = 'Pulse a chave RESET do microcontrolador e pressione OK';
 STR_MSG_CHOOSEPORT = 'Escolha ou digite a porta serial conectada no gravador';
 
 STR_TXT_HELP = ''+#13+#10
-+'Gravador ISP para microcontroladores da família Atmel 89S e Atmega8, Atmega8515 e Atmega8535'+#13+#10
++'Gravador ISP para microcontroladores da famÃ­lia Atmel 89S e Atmega8, Atmega8515 e Atmega8535'+#13+#10
 +''+#13+#10
 +''+#13+#10
-+'-GRAVAÇÃO-'+#13+#10
-+'Modo Normal: O arquivo é byte a byte gravado e verificado no chip, se ocorre algum erro na gravação o programa tenta'+#13+#10
-+'corrigir gravando o byte novamente com velocidade de comunicação mais baixa.'+#13+#10
-+'Modo Diferencial: O arquivo é comprado com os dados gravados no chip, depois é feita a gravação apenas dos bytes'+#13+#10
-+'diferentes. (OBS: Modo disponível apenas para AT89S8252/S53).'+#13+#10
-+'Modo Rápido: Igual ao Modo Normal, mas somente os primeiros 15 bytes são verificados se foram gravados corretamente.'+#13+#10
++'-GRAVAÃ‡ÃƒO-'+#13+#10
++'Modo Normal: O arquivo Ã© byte a byte gravado e verificado no chip, se ocorre algum erro na gravaÃ§Ã£o o programa tenta'+#13+#10
++'corrigir gravando o byte novamente com velocidade de comunicaÃ§Ã£o mais baixa.'+#13+#10
++'Modo Diferencial: O arquivo Ã© comprado com os dados gravados no chip, depois Ã© feita a gravaÃ§Ã£o apenas dos bytes'+#13+#10
++'diferentes. (OBS: Modo disponÃ­vel apenas para AT89S8252/S53).'+#13+#10
++'Modo RÃ¡pido: Igual ao Modo Normal, mas somente os primeiros 15 bytes sÃ£o verificados se foram gravados corretamente.'+#13+#10
 +''+#13+#10
 +'-LOCK BITS (89S)-'+#13+#10
-+'1: Desabilita o uso de instruções MOVC executadas em memória externa para ler bytes da memória interna, e desabilita'+#13+#10
-+'gravação da memória interna.'+#13+#10
-+'2: Igual ao 1, e também desabilita a leitura da memória de programa interna.'+#13+#10
-+'3: Igual ao 2, e também desabilita a execução de programas em memória externa.'+#13+#10
-+'- Depois que algum Lock Bit foi ativado, o único modo de destravar é limpando a memória.'+#13+#10
-+'- Em alguns microcontroladores é necessário desligar e ligar a alimentação após limpar os lock bits.'+#13+#10
++'1: Desabilita o uso de instruÃ§Ãµes MOVC executadas em memÃ³ria externa para ler bytes da memÃ³ria interna, e desabilita'+#13+#10
++'gravaÃ§Ã£o da memÃ³ria interna.'+#13+#10
++'2: Igual ao 1, e tambÃ©m desabilita a leitura da memÃ³ria de programa interna.'+#13+#10
++'3: Igual ao 2, e tambÃ©m desabilita a execuÃ§Ã£o de programas em memÃ³ria externa.'+#13+#10
++'- Depois que algum Lock Bit foi ativado, o Ãºnico modo de destravar Ã© limpando a memÃ³ria.'+#13+#10
++'- Em alguns microcontroladores Ã© necessÃ¡rio desligar e ligar a alimentaÃ§Ã£o apÃ³s limpar os lock bits.'+#13+#10
 +''+#13+#10
 +'-LOCK BITS (AVR)-'+#13+#10
-+'Quando um lockbit está selecionado, significa que ele está programado (está em zero).'+#13+#10
-+'Cuidado para não ativar algum lockbit que desabilita a comunicação ISP.'+#13+#10
++'Quando um lockbit estÃ¡ selecionado, significa que ele estÃ¡ programado (estÃ¡ em zero).'+#13+#10
++'Cuidado para nÃ£o ativar algum lockbit que desabilita a comunicaÃ§Ã£o ISP.'+#13+#10
 +''+#13+#10
 +'-FUSE BITS (AVR)-'+#13+#10
-+'Quando um fusebit está selecionado, significa que ele está programado (está em zero).'+#13+#10
-+'Os fusebits não são limpos pelo botão de apagar memória.'+#13+#10
++'Quando um fusebit estÃ¡ selecionado, significa que ele estÃ¡ programado (estÃ¡ em zero).'+#13+#10
++'Os fusebits nÃ£o sÃ£o limpos pelo botÃ£o de apagar memÃ³ria.'+#13+#10
 +''+#13+#10
-+'-LIMPAR MEMÓRIA-'+#13+#10
-+'Todas as memórias internas (flash, eeprom) e os Lock Bits serão apagados.'+#13+#10
++'-LIMPAR MEMÃ“RIA-'+#13+#10
++'Todas as memÃ³rias internas (flash, eeprom) e os Lock Bits serÃ£o apagados.'+#13+#10
 +''+#13+#10
-+'-PARÂMETROS-'+#13+#10
-+'A utilização dos parâmetros possibilita chamar o Grava a partir de outros programas.'+#13+#10
-+'O programa aceita dois parâmetros para gravar a memória de programa pela linha de comando:'+#13+#10
++'-PARÃ‚METROS-'+#13+#10
++'A utilizaÃ§Ã£o dos parÃ¢metros possibilita chamar o Grava a partir de outros programas.'+#13+#10
++'O programa aceita dois parÃ¢metros para gravar a memÃ³ria de programa pela linha de comando:'+#13+#10
 +'1: Informa o tipo do chip a ser gravado. Os valores podem ser: s8252, s8253, s51, s52, s53 ou atmega8.'+#13+#10
-+'2: Informa o nome do arquivo a ser gravado. O programa iniciará a gravação do arquivo imediatamente.'+#13+#10
++'2: Informa o nome do arquivo a ser gravado. O programa iniciarÃ¡ a gravaÃ§Ã£o do arquivo imediatamente.'+#13+#10
 +'Ex: Grava.exe s53 arquivo.bin'+#13+#10
 +''+#13+#10
 +'-FERRAMENTAS-'+#13+#10
-+'Conversor de arquivos entre os formatos HEX (Intel-HEX com endereçamento 16bits) e BIN (arquivo binário).'+#13+#10
-+'Editor hexadecimal para arquivos. Permite fazer a edição de bytes nos arquivos, geralmente no formato .BIN.'+#13+#10
++'Conversor de arquivos entre os formatos HEX (Intel-HEX com endereÃ§amento 16bits) e BIN (arquivo binÃ¡rio).'+#13+#10
++'Editor hexadecimal para arquivos. Permite fazer a ediÃ§Ã£o de bytes nos arquivos, geralmente no formato .BIN.'+#13+#10
 +''+#13+#10
 +'** OBS **'+#13+#10
-+'Deixe a chave de Reset aberta (1) para o microcontrolador ficar no modo de gravação, e fechada (0) para ele executar o programa gravado.'+#13+#10
-+'No caso dos AVR é o contrário: Reset fechada (0) para o microcontrolador ficar no modo de gravação, e aberta (1) para ele executar o programa gravado.'+#13+#10
-+'Pulsar a chave de Reset do microcontrolador se ele não iniciar a gravação/leitura e tentar novamente.'+#13+#10
-+'Verifique se o cristal esta oscilando e se a alimentação está estável, com capacitores para filtrar os 5V.'+#13+#10
-+'No caso do Atmega8/85X5 que vem de fábrica com o oscilador interno ligado, não é necessário cristal.'+#13+#10
++'Deixe a chave de Reset aberta (1) para o microcontrolador ficar no modo de gravaÃ§Ã£o, e fechada (0) para ele executar o programa gravado.'+#13+#10
++'No caso dos AVR Ã© o contrÃ¡rio: Reset fechada (0) para o microcontrolador ficar no modo de gravaÃ§Ã£o, e aberta (1) para ele executar o programa gravado.'+#13+#10
++'Pulsar a chave de Reset do microcontrolador se ele nÃ£o iniciar a gravaÃ§Ã£o/leitura e tentar novamente.'+#13+#10
++'Verifique se o cristal esta oscilando e se a alimentaÃ§Ã£o estÃ¡ estÃ¡vel, com capacitores para filtrar os 5V.'+#13+#10
++'No caso do Atmega8/85X5 que vem de fÃ¡brica com o oscilador interno ligado, nÃ£o Ã© necessÃ¡rio cristal.'+#13+#10
 +''+#13+#10
 +'* AT89S8253 e ATMEGA8/85X5 *'+#13+#10
-+'Na gravação da memória Flash, a memória EEprom também será apagada.'+#13+#10
++'Na gravaÃ§Ã£o da memÃ³ria Flash, a memÃ³ria EEprom tambÃ©m serÃ¡ apagada.'+#13+#10
 +'';
 
 
 {$ELSE}
 STR_NAME_PROGRAM = 'Atmel Write';
-STR_COPYRIGHT = '"GRAVA ATMEL" (Atmel Write) (serial port) v3.2, ©2016 Rafael B. Ferrari.' +#13 + #10 + 'rafaelbf@hotmail.com';
+STR_COPYRIGHT = '"GRAVA ATMEL" (Atmel Write) (serial port) v3.3, Â©2021 Rafael B. Ferrari.' +#13 + #10 + 'rafaelbf@hotmail.com';
 STR_NON_SERIAL = 'Cannot open serial port. Use the "port" menu to choose another';
 STR_LOCKREAD_OK = 'L.B. read';
 STR_LOCKWRITE_OK = 'L.B. programmed';
@@ -422,6 +428,7 @@ STR_SUBMENU_FAST = 'Fast';
 STR_SUBMENU_CONVHEXBIN = 'HEX -> BIN converter';
 STR_SUBMENU_CONVBINHEX = 'BIN -> HEX converter';
 STR_SUBMENU_EDITHEX = 'Hex editor';
+STR_SUBMENU_IGNORASIGN = 'Ignore bad signature';
 STR_SUBMENU_ESQUEMA = 'Schematic';
 STR_SUBMENU_GRAVACAO = 'Help';
 STR_SUBMENU_SOBRE = 'About...';
@@ -852,7 +859,7 @@ begin
 
 //sleep(50);
 
-if ((algoritmo = ALG_FL_8252) or (algoritmo = ALG_EE_8252)) then // o s53 e s8252 nao tem funcao ReadSignature
+if ( (algoritmo = ALG_FL_8252) or (algoritmo = ALG_EE_8252) or (Ignorarassinatura.Checked) ) then // o s53 e s8252 nao tem funcao ReadSignature
 begin
   ReadSignature:=true;
   exit;
@@ -1362,6 +1369,7 @@ menuDiferencial.caption := STR_SUBMENU_DIFERENCIAL;
 hexbin1.caption := STR_SUBMENU_CONVHEXBIN;
 binhex1.caption := STR_SUBMENU_CONVBINHEX;
 editorhex1.caption := STR_SUBMENU_EDITHEX;
+Ignorarassinatura.Caption := STR_SUBMENU_IGNORASIGN;
 esquema1.caption := STR_SUBMENU_ESQUEMA;
 gravao2.caption := STR_SUBMENU_GRAVACAO;
 sore1.caption := STR_SUBMENU_SOBRE;
@@ -2203,7 +2211,7 @@ procedure TForm1.Sore1Click(Sender: TObject);
 begin
   texto := STR_COPYRIGHT;
   texto := texto + #13+#10+#13+#10;
-//  if QuantumTimerExists then texto := texto + 'Temporização mínima do Quantum counter: ' + floattostr(QuantumTimerMinmicrosec) + ' us' + #13+#10;
+//  if QuantumTimerExists then texto := texto + 'TemporizaÃ§Ã£o mÃ­nima do Quantum counter: ' + floattostr(QuantumTimerMinmicrosec) + ' us' + #13+#10;
   MessageBox(form1.Handle,pchar(texto),PAnsiChar(STR_MSG_INFORMATION),MB_OK + MB_ICONINFORMATION + MB_APPLMODAL);
 end;
 
