@@ -828,6 +828,10 @@ object Form1: TForm1
         Caption = 'Editor hexadecimal'
         OnClick = EditorHEX1Click
       end
+      object Ignorarassinatura: TMenuItem
+        AutoCheck = True
+        Caption = 'Ignorar assinatura'
+      end
     end
     object Porta1: TMenuItem
       Caption = 'Porta'
